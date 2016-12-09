@@ -2,7 +2,7 @@ package mx.com.solucionestea.codelizer.controllers;
 
 import com.github.javaparser.ParseException;
 import mx.com.solucionestea.codelizer.core.DirsAnalyzer;
-import mx.com.solucionestea.codelizer.core.visitors.TEAVizitor;
+import mx.com.solucionestea.codelizer.core.visitors.TEAVisitor;
 import mx.com.solucionestea.codelizer.database.dao.*;
 import mx.com.solucionestea.codelizer.database.models.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,7 +82,7 @@ public class CodelizerServiceController {
             for (CFile cFile : javaFiles) {
                 cFile.setcModule(cModule);
                 try {
-                    new TEAVizitor().visitFile(cFile);
+                    new TEAVisitor().visitFile(cFile);
                 } catch (IOException | ParseException e) {
                     e.printStackTrace();
                 }

@@ -5,10 +5,12 @@ import com.github.javaparser.ParseException;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
+import com.github.javaparser.ast.body.Parameter;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 import mx.com.solucionestea.codelizer.database.models.CClass;
 import mx.com.solucionestea.codelizer.database.models.CFile;
 import mx.com.solucionestea.codelizer.database.models.CMethod;
+import mx.com.solucionestea.codelizer.database.models.CParameter;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,7 +22,7 @@ import java.util.List;
  *
  * Created by giovanni on 8/12/16.
  */
-public class TEAVizitor extends VoidVisitorAdapter<Object> {
+public class TEAVisitor extends VoidVisitorAdapter<Object> {
 
     /** The file currently being analyzed */
     private CFile currentFile;
@@ -74,6 +76,19 @@ public class TEAVizitor extends VoidVisitorAdapter<Object> {
         cMethod.setName(node.getName());
         cMethod.setType(node.getType().toString());
         cMethod.setcClass(currentClass);
+        cMethod.setAccess("public");
+
+
+        // Subtract method params
+        cMethod.setParameters(new ArrayList<>());
+        for (Parameter parameter : node.getParameters()) {
+
+            CParameter cParam = new CParameter();
+            cParam.setName(parameter.getName());
+            cParam.setType(parameter.getType().toString());
+            cParam.setcMethod(cMethod);
+            cMethod.getParameters().add(cParam);
+        }
 
         // Add to methods list
         methods.add(cMethod);
