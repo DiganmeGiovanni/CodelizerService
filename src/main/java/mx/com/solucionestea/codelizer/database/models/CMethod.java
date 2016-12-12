@@ -9,35 +9,34 @@ import java.util.Collection;
  * Created by giovanni on 8/12/16.
  */
 @Entity
+@Table(name = "c_methods")
 public class CMethod {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private int id;
 
     @NotNull
     private String name;
-
-    @NotNull
-    private String access;
+    private String comment;
+    private String encapsulation;
 
     @NotNull
     private String type;
 
     @ManyToOne
-    @JoinColumn(name = "cclass_id")
+    @JoinColumn(name = "c_classes_id")
     private CClass cClass;
 
     @OneToMany(mappedBy = "cMethod", cascade = CascadeType.ALL)
     private Collection<CParameter> parameters;
 
 
-    public long getId() {
-
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -49,12 +48,20 @@ public class CMethod {
         this.name = name;
     }
 
-    public String getAccess() {
-        return access;
+    public String getComment() {
+        return comment;
     }
 
-    public void setAccess(String access) {
-        this.access = access;
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public String getEncapsulation() {
+        return encapsulation;
+    }
+
+    public void setEncapsulation(String encapsulation) {
+        this.encapsulation = encapsulation;
     }
 
     public String getType() {

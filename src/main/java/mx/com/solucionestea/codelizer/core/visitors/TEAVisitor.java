@@ -58,6 +58,10 @@ public class TEAVisitor extends VoidVisitorAdapter<Object> {
         cClass.setName(node.getName());
         cClass.setcFile(currentFile);
 
+        if (cClass.getComment() != null) {
+            cClass.setComment(node.getComment().getContent());
+        }
+
         // Add class to file classes
         classes.add(cClass);
 
@@ -76,7 +80,10 @@ public class TEAVisitor extends VoidVisitorAdapter<Object> {
         cMethod.setName(node.getName());
         cMethod.setType(node.getType().toString());
         cMethod.setcClass(currentClass);
-        cMethod.setAccess("public");
+
+        if (node.getComment() != null) {
+            cMethod.setComment(node.getComment().getContent());
+        }
 
 
         // Subtract method params
@@ -87,6 +94,11 @@ public class TEAVisitor extends VoidVisitorAdapter<Object> {
             cParam.setName(parameter.getName());
             cParam.setType(parameter.getType().toString());
             cParam.setcMethod(cMethod);
+
+            if (parameter.getComment() != null) {
+                cParam.setComment(parameter.getComment().getContent());
+            }
+
             cMethod.getParameters().add(cParam);
         }
 

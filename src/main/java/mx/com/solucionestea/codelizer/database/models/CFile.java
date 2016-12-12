@@ -9,31 +9,34 @@ import java.util.Collection;
  * Created by giovanni on 7/12/16.
  */
 @Entity
-@Table(name = "CFile")
+@Table(name = "c_files")
 public class CFile implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private int id;
 
     @Column(name = "file_name")
     private String fileName;
-
     private String path;
 
     @ManyToOne
-    @JoinColumn(name = "cmodule_id")
-    private CModule cModule;
+    @JoinColumn(name = "p_modules_id")
+    private PModule pModule;
+
+    @ManyToOne
+    @JoinColumn(name = "analysis_id")
+    private Analysis analysis;
 
     @OneToMany(mappedBy = "cFile", cascade = CascadeType.ALL)
     private Collection<CClass> classes;
 
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -53,12 +56,20 @@ public class CFile implements Serializable {
         this.path = path;
     }
 
-    public CModule getcModule() {
-        return cModule;
+    public PModule getpModule() {
+        return pModule;
     }
 
-    public void setcModule(CModule cModule) {
-        this.cModule = cModule;
+    public void setpModule(PModule pModule) {
+        this.pModule = pModule;
+    }
+
+    public Analysis getAnalysis() {
+        return analysis;
+    }
+
+    public void setAnalysis(Analysis analysis) {
+        this.analysis = analysis;
     }
 
     public Collection<CClass> getClasses() {

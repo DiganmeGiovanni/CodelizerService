@@ -7,8 +7,8 @@ import javax.transaction.Transactional;
 
 /**
  *
- * Created by giovanni on 7/12/16.
+ * Created by giovanni on 12/12/16.
  */
 @Transactional
-public interface ProjectDao extends CrudRepository<Project, Long> {
+public interface ProjectDao extends CrudRepository<Project, Integer> {
 }

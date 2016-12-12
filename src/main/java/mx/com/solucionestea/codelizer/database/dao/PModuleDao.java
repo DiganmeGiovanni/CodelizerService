@@ -4,6 +4,7 @@ import mx.com.solucionestea.codelizer.database.models.PModule;
 import org.springframework.data.repository.CrudRepository;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 /**
  *
@@ -11,4 +12,6 @@ import javax.transaction.Transactional;
  */
 @Transactional
 public interface PModuleDao extends CrudRepository<PModule, Long> {
+
+    public List<PModule> findByProjectId(int projectId);
 }

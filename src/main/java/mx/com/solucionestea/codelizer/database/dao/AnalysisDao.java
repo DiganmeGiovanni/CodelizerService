@@ -10,5 +10,5 @@ import javax.transaction.Transactional;
  * Created by giovanni on 7/12/16.
  */
 @Transactional
-public interface AnalysisDao extends CrudRepository<Analysis, Long> {
+public interface AnalysisDao extends CrudRepository<Analysis, Integer> {
 }
