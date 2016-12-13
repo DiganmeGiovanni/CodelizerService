@@ -5,7 +5,6 @@ import mx.com.solucionestea.codelizer.core.DirsAnalyzer;
 import mx.com.solucionestea.codelizer.core.visitors.TEAVisitor;
 import mx.com.solucionestea.codelizer.database.dao.AnalysisDao;
 import mx.com.solucionestea.codelizer.database.dao.CFileDao;
-import mx.com.solucionestea.codelizer.database.dao.PModuleDao;
 import mx.com.solucionestea.codelizer.database.models.Analysis;
 import mx.com.solucionestea.codelizer.database.models.CFile;
 import mx.com.solucionestea.codelizer.database.models.PModule;
@@ -31,9 +30,6 @@ public class CodelizerServiceController {
     @Autowired
     private CFileDao cFileDao;
 
-    @Autowired
-    private PModuleDao pModuleDao;
-
     @RequestMapping("/codelize")
     @ResponseBody
     public String codelize(@RequestParam("analysisId") int analysisId) {
@@ -49,6 +45,7 @@ public class CodelizerServiceController {
             List<CFile> javaFiles = DirsAnalyzer.getJavaFiles(pModule.getPath());
             for (CFile cFile : javaFiles) {
                 cFile.setpModule(pModule);
+                cFile.setAnalysis(analysis);
 
                 try {
 
